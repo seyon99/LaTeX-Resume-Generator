@@ -5,6 +5,7 @@ services:
     # Uncomment if you'd like to load your env vars from file
     # env_file:
     #   - secrets.env
+    platform: linux/amd64
     ports:
       - 8080:8080
     restart: "always"

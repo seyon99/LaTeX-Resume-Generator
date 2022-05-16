@@ -1,6 +1,7 @@
 version: '3'
 services:
   myapp:
+    platform: linux/amd64
     environment:
       - JAVA_TOOL_OPTIONS="-agentlib:jdwp=transport=dt_socket,address=0.0.0.0:8000,server=y,suspend=n"
     ports:
