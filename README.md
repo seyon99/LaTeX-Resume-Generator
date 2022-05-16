@@ -4,6 +4,8 @@
 A web application to generate LaTeX resumes for software developers.
 
 ## Technologies Used (Tentative)
-  - Django
-  - React
-  - PostgreSQL
+  - Java
+  - Spring MVC
+  - Spring Boot
+  - Gradle
+  - Docker
