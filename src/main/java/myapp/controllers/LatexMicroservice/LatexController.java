@@ -1,4 +1,4 @@
-package myapp.controllers;
+package myapp.controllers.LatexMicroservice;
 
 import java.util.HashMap;
 
