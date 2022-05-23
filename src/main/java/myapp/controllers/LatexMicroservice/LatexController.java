@@ -5,11 +5,11 @@ import java.util.List;
 
 public class LatexController implements ILatexGenerator {
 
-    private HashMap<String, String> settings;
+    private HashMap<String, String> docSettings;
 
 
     public LatexController() {
-        this.settings = new HashMap<String, String>();
+        this.docSettings = new HashMap<>();
 
         String packages = "\\documentclass[letterpaper,11pt]{article}+" +
                 "\\usepackage{latexsym}\n" +
@@ -28,7 +28,7 @@ public class LatexController implements ILatexGenerator {
                 "\\setlength{\\multicolsep}{-3.0pt}\n" +
                 "\\setlength{\\columnsep}{-1pt}\n" +
                 "\\input{glyphtounicode}";
-        this.settings.put("packages", packages);
+        this.docSettings.put("packages", packages);
 
         String presets = "\\pagestyle{fancy}\n" +
                 "\\fancyhf{}\n" +
@@ -48,7 +48,7 @@ public class LatexController implements ILatexGenerator {
                 "\\vspace{-4pt}\\scshape\\raggedright\\large\\bfseries\n" +
                 "}{}{0em}{}[\\color{black}\\titlerule \\vspace{-5pt}]\n" +
                 "\\pdfgentounicode=1";
-        this.settings.put("presets", presets);
+        this.docSettings.put("presets", presets);
 
         String customCommands = "\\newcommand{\\resumeItem}[1]{\n" +
                 "  \\item\\small{\n" +
@@ -93,7 +93,7 @@ public class LatexController implements ILatexGenerator {
                 "\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}\n" +
                 "\\newcommand{\\resumeItemListStart}{\\begin{itemize}}\n" +
                 "\\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}";
-        this.settings.put("customCommands", customCommands);
+        this.docSettings.put("customCommands", customCommands);
 
     }
 
@@ -137,13 +137,54 @@ public class LatexController implements ILatexGenerator {
     }
 
     @Override
-    public String generateEducation(String instName, String dateRange, String degreeName, List<String> relCoursework) {
-        return null;
+    public String generateEducation(String instName, String dateRange, String degreeName, String location,
+                                    String relCoursework) {
+        try{
+            String template = "\\section{Education}\n" +
+                    "  \\resumeSubHeadingListStart\n" +
+                    "    \\resumeSubheading\n" +
+                    "      {%s}{%s}\n" +
+                    "      {%s}{%s}\n" +
+                    "      \\resumeItem{Relevant coursework: %s}\n" +
+                    "  \\resumeSubHeadingListEnd";
+            String edFormatted = String.format(template, instName, dateRange, degreeName, location, relCoursework);
+            return edFormatted;
+
+        } catch (Exception e){
+            // handle logging
+            return e.getMessage();
+        }
     }
+
 
     @Override
     public String generateExperience(String companyName, String posName, String location, String dateRange, List<String> bulletPoints) {
         return null;
+    }
+
+
+    public String generateExperienceSection(List<String> experience){
+        try {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            String open = "\\section{Experience}\n" +
+                    "  \\resumeSubHeadingListStart";
+
+            String close = "  \\resumeSubHeadingListEnd\n" +
+                    "\\vspace{-16pt}";
+
+            stringBuilder.append(open);
+            for (String exp : experience) {
+                stringBuilder.append(exp);
+            }
+
+            stringBuilder.append(close);
+            return stringBuilder.toString();
+
+        } catch (Exception e){
+            return e.getMessage();
+        }
+
     }
 
     @Override

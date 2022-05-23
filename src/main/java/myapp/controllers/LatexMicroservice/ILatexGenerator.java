@@ -20,7 +20,8 @@ public interface ILatexGenerator {
                                  String github, String website);
 
 
-    public String generateEducation(String instName, String dateRange, String degreeName, List<String> relCoursework);
+    public String generateEducation(String instName, String dateRange, String degreeName, String location,
+                                    String relCoursework);
 
 
     public String generateExperience(String companyName, String posName, String location, String dateRange,

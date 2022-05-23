@@ -1,5 +1,6 @@
 package myapp.controllers;
 
+import myapp.controllers.LatexMicroservice.LatexController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,11 @@ public class HomeController {
     }
 
     @PostMapping("/createheader")
+    // Create data object for request body later
     public String newHeader(@RequestParam String name){
-        return "Hello, my name is " + name +", nice to meet you!";
+        LatexController ctrl = new LatexController();
+        String head = ctrl.generateHeader(name, "88 Highhill", "111-111-1111", "abc@gmail.com",
+                "seyon-k", "seyon99", "www.seyonk.me");
+        return head;
     }
 }
