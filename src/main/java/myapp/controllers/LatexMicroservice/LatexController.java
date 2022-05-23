@@ -159,7 +159,24 @@ public class LatexController implements ILatexGenerator {
 
     @Override
     public String generateExperience(String companyName, String posName, String location, String dateRange, List<String> bulletPoints) {
-        return null;
+        try{
+            String exp = "\\resumeSubheading\n" +
+                    "      {%s}{%s}\n" +
+                    "      {%s}{%s}\n" +
+                    "      \\resumeItemListStart\n";
+            String expFormatted = String.format(exp, companyName, dateRange, posName, location);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(exp);
+            for (String bullet : bulletPoints){
+                String latexBull = String.format("\\resumeItem{%s}\n", bullet);
+                stringBuilder.append(latexBull);
+            }
+            stringBuilder.append("\\resumeItemListEnd");
+            return stringBuilder.toString();
+        } catch (Exception e){
+            return e.getMessage();
+        }
+
     }
 
 
