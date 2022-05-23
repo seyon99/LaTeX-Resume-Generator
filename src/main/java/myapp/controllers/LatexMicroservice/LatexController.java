@@ -1,8 +1,9 @@
 package myapp.controllers.LatexMicroservice;
 
 import java.util.HashMap;
+import java.util.List;
 
-public class LatexController {
+public class LatexController implements ILatexGenerator {
 
     private HashMap<String, String> settings;
 
@@ -133,5 +134,25 @@ public class LatexController {
             // Handle logging at the end
             return e.getMessage();
         }
+    }
+
+    @Override
+    public String generateEducation(String instName, String dateRange, String degreeName, List<String> relCoursework) {
+        return null;
+    }
+
+    @Override
+    public String generateExperience(String companyName, String posName, String location, String dateRange, List<String> bulletPoints) {
+        return null;
+    }
+
+    @Override
+    public String generateProjects(String projName, String techStack, String dateRange, List<String> bulletPoints) {
+        return null;
+    }
+
+    @Override
+    public String generateTechnicalSkills(String langs, String frameworks, String devTools, String libs) {
+        return null;
     }
 }
