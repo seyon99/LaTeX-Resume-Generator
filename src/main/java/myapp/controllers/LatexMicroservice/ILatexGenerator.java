@@ -28,7 +28,8 @@ public interface ILatexGenerator {
                                      List<String> bulletPoints);
 
 
-    public String generateProjects(String projName, String techStack, String dateRange, List<String> bulletPoints);
+    public String generateProject(String projName, String repoLink, String techStack,
+                                  List<String> bulletPoints);
 
 
     public String generateTechnicalSkills(String langs, String frameworks, String devTools,

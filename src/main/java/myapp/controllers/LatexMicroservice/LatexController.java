@@ -204,13 +204,78 @@ public class LatexController implements ILatexGenerator {
 
     }
 
+
     @Override
-    public String generateProjects(String projName, String techStack, String dateRange, List<String> bulletPoints) {
-        return null;
+    public String generateProject(String projName, String repoLink, String techStack, List<String> bulletPoints) {
+        try{
+            String open = String.format("\\resumeProjectHeading\n" +
+                    "          {\\href{%s}{\\textbf{%s}} $|$ " +
+                    "\\emph{%s}}{}\n" +
+                    "          \\resumeItemListStart", repoLink, projName, techStack);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(open);
+
+            for (String bullet : bulletPoints){
+                String projBull = String.format("\\resumeItem{%s}", bullet);
+                stringBuilder.append(projBull);
+            }
+
+            String close = "\\resumeItemListEnd\n" +
+                    "          \\vspace{-13pt}";
+            stringBuilder.append(close);
+
+            return stringBuilder.toString();
+        } catch(Exception e){
+            return e.getMessage();
+        }
     }
+
+
+    String generateProjectSection(List<String> projects){
+        try {
+            String open = "\\section{Projects}\n" +
+                    "    \\vspace{-5pt}\n" +
+                    "    \\resumeSubHeadingListStart";
+
+            String close = "    \\resumeSubHeadingListEnd\n" +
+                    "\\vspace{-15pt}\n" +
+                    "\n" +
+                    "\\end{document}";
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(open);
+
+            for (String project : projects) {
+                stringBuilder.append(project);
+            }
+
+            stringBuilder.append(close);
+            return stringBuilder.toString();
+        }
+        catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
 
     @Override
     public String generateTechnicalSkills(String langs, String frameworks, String devTools, String libs) {
-        return null;
+        try{
+            String progSkills = "\\section{Technical Skills}\n" +
+                    " \\begin{itemize}[leftmargin=0.15in, label={}]\n" +
+                    "    \\small{\\item{\n" +
+                    "     \\textbf{Languages}{: %s} \\\\\n" +
+                    "     \\textbf{Frameworks}{: %s} \\\\\n" +
+                    "     \\textbf{Developer Tools}{: %s} \\\\\n" +
+                    "     \\textbf{Libraries}{: %s} \\\\\n" +
+                    "    }}\n" +
+                    " \\end{itemize}\n" +
+                    " \\vspace{-16pt}";
+
+            String tSkills = String.format(progSkills, langs, frameworks, devTools, libs);
+            return tSkills;
+        } catch (Exception e){
+            return e.getMessage();
+        }
     }
 }
